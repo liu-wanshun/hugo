@@ -13,8 +13,8 @@ buildscript {
     }
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'hugo'
+apply plugin: "com.android.application"
+apply plugin: "hugo"
 
 
 android {
@@ -40,5 +40,5 @@ android {
 }
 
 hugo {
-   // enabled = false
+    enabled = false
 }

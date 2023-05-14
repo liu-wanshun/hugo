@@ -31,9 +31,9 @@ class HugoPlugin : Plugin<Project> {
             libraryExtension?.libraryVariants ?: appExtension?.applicationVariants ?: return
 
 
-        project.dependencies.apply {
-            add("debugImplementation", "com.jakewharton.hugo:hugo-runtime:1.2.2-SNAPSHOT")
-        }
+//        project.dependencies.apply {
+//            add("debugImplementation", "com.jakewharton.hugo:hugo-runtime:1.2.2-SNAPSHOT")
+//        }
 
         project.extensions.create("hugo", HugoExtension::class.java)
 

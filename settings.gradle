@@ -3,6 +3,7 @@ pluginManagement {
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/public" }
         gradlePluginPortal()
+        maven { url "https://jitpack.io" }
     }
 }
 dependencyResolutionManagement {
@@ -10,9 +11,11 @@ dependencyResolutionManagement {
     repositories {
         maven { url "https://maven.aliyun.com/repository/google" }
         maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://jitpack.io" }
         mavenLocal()
     }
 }
+include ':hugo-annotations'
 include ':hugo-plugin'
 include ':hugo-runtime'
-include ':hugo-example'
+//include ':hugo-example'

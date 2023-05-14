@@ -1,0 +1,21 @@
+apply plugin: "java"
+apply plugin: "maven-publish"
+
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+
+publishing {
+  publications {
+    release(MavenPublication) {
+      afterEvaluate {
+        from components.java
+      }
+      groupId = 'com.jakewharton.hugo'
+      artifactId = 'hugo-annotations'
+      version = '1.2.2-SNAPSHOT'
+    }
+  }
+}
+
+
