@@ -1,41 +1,44 @@
 buildscript {
-  dependencies {
-    repositories {
-      mavenCentral()
+    dependencies {
+        repositories {
+            maven { url "https://maven.aliyun.com/repository/google" }
+            maven { url "https://maven.aliyun.com/repository/public" }
 
-      // NOTE: This is only needed when developing the plugin!
-      mavenLocal()
+            // NOTE: This is only needed when developing the plugin!
+            mavenLocal()
+        }
+
+        classpath "com.android.tools.build:gradle:7.4.2"
+        classpath 'com.jakewharton.hugo:hugo-plugin:1.2.2-SNAPSHOT'
     }
-
-    classpath 'com.android.tools.build:gradle:1.3.1'
-    classpath 'com.jakewharton.hugo:hugo-plugin:1.2.2-SNAPSHOT'
-  }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'hugo'
 
-dependencies {
-  repositories {
-    mavenCentral()
-
-    // NOTE: This is only needed when developing the plugin!
-    mavenLocal()
-  }
-}
 
 android {
-  compileSdkVersion 23
-  buildToolsVersion '23.0.1'
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_7
-    targetCompatibility JavaVersion.VERSION_1_7
-  }
-
-  buildTypes {
-    dev {
-      applicationIdSuffix '.dev'
+    compileSdk 33
+    namespace "com.example.hugo"
+    defaultConfig {
+        applicationId = "com.example.hugo"
+        versionCode = 1
+        versionName = "1.0.0"
+        minSdk = 28
+        targetSdk = 33
     }
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        dev {
+            applicationIdSuffix '.dev'
+        }
+    }
+}
+
+hugo {
+   // enabled = false
 }

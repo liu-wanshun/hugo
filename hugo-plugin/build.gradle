@@ -1,43 +1,42 @@
-apply plugin: 'groovy'
-apply plugin: 'nexus'
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+apply plugin: 'maven-publish'
+apply plugin: "java-gradle-plugin"
+apply plugin: "org.jetbrains.kotlin.jvm"
 
-targetCompatibility = JavaVersion.VERSION_1_7
-sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
 
+tasks.withType(KotlinCompile).configureEach {
+    compilerOptions.jvmTarget = JvmTarget.JVM_1_8
+}
 dependencies {
-  compile gradleApi()
-  compile localGroovy()
-  compile 'com.android.tools.build:gradle:1.3.1'
-  compile 'org.aspectj:aspectjtools:1.8.6'
-  compile 'org.aspectj:aspectjrt:1.8.6'
+    implementation("com.android.tools.build:gradle:7.0.0")
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation "org.aspectj:aspectjtools:1.9.19"
+    implementation "org.aspectj:aspectjrt:1.9.19"
 }
 
-modifyPom {
-  project {
-    name "Hugo Plugin"
-    description POM_DESCRIPTION
-    url POM_URL
+group = "com.jakewharton.hugo"
+version = "1.2.2-SNAPSHOT"
 
-    scm {
-      url POM_SCM_URL
-      connection POM_SCM_CONNECTION
-      developerConnection POM_SCM_DEV_CONNECTION
+gradlePlugin {
+    plugins {
+        create("hugo") {
+            id = "hugo"
+            implementationClass = "hugo.weaving.plugin.HugoPlugin"
+        }
     }
-
-    licenses {
-      license {
-        name POM_LICENCE_NAME
-        url POM_LICENCE_URL
-        distribution POM_LICENCE_DIST
-      }
+}
+publishing {
+    publications {
+        hugo(MavenPublication) {
+            from components.java
+            groupId = 'com.jakewharton.hugo'
+            artifactId = 'hugo-plugin'
+            version = '1.2.2-SNAPSHOT'
+        }
     }
-
-    developers {
-      developer {
-        id POM_DEVELOPER_ID
-        name POM_DEVELOPER_NAME
-      }
-    }
-  }
 }
